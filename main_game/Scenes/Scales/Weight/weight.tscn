@@ -1,0 +1,26 @@
+[gd_scene load_steps=4 format=3 uid="uid://0utvummkfwkl"]
+
+[ext_resource type="Script" path="res://Assets/Classes/DragItem.gd" id="1_emjej"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_nou13"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_teukk"]
+size = Vector2(16, 32)
+
+[node name="Weight" type="RigidBody2D" groups=["pickable"]]
+input_pickable = true
+mass = 0.1
+script = ExtResource("1_emjej")
+metadata/_edit_group_ = true
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="."]
+self_modulate = Color(0, 0, 0, 1)
+position = Vector2(4.76837e-07, -1.90735e-06)
+scale = Vector2(16, 32)
+mesh = SubResource("BoxMesh_nou13")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -1.90735e-06)
+shape = SubResource("RectangleShape2D_teukk")
+
+[connection signal="input_event" from="." to="." method="_on_input_event"]

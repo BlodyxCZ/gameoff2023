@@ -1,0 +1,110 @@
+[gd_scene load_steps=8 format=3 uid="uid://bdo3v0tum0s11"]
+
+[ext_resource type="Script" path="res://Scenes/Scales/Basic/scale.gd" id="1_02fu3"]
+[ext_resource type="PackedScene" uid="uid://0utvummkfwkl" path="res://Scenes/Scales/Weight/weight.tscn" id="2_83260"]
+[ext_resource type="Script" path="res://Scenes/Scales/Basic/Platform1.gd" id="3_m302u"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_aqs8r"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lfj3t"]
+size = Vector2(224, 36)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_45m7g"]
+bg_color = Color(0.196078, 0.196078, 0.196078, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xpfmq"]
+size = Vector2(224, 162)
+
+[node name="Scale" type="Node2D"]
+script = ExtResource("1_02fu3")
+
+[node name="Weight" parent="." instance=ExtResource("2_83260")]
+position = Vector2(560, 621)
+
+[node name="Weight2" parent="." instance=ExtResource("2_83260")]
+position = Vector2(1072, 594)
+
+[node name="Platform1" type="StaticBody2D" parent="."]
+position = Vector2(528, 828)
+script = ExtResource("3_m302u")
+metadata/_edit_group_ = true
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="Platform1"]
+position = Vector2(-5.72205e-06, 9.53674e-07)
+scale = Vector2(224, 36)
+mesh = SubResource("BoxMesh_aqs8r")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Platform1"]
+shape = SubResource("RectangleShape2D_lfj3t")
+
+[node name="Panel" type="Panel" parent="Platform1"]
+offset_left = -48.0
+offset_top = -9.0
+offset_right = 48.0
+offset_bottom = 9.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_45m7g")
+
+[node name="Label" type="Label" parent="Platform1/Panel"]
+layout_mode = 0
+offset_top = -9.0
+offset_right = 96.0
+offset_bottom = 27.0
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Area2D" type="Area2D" parent="Platform1"]
+position = Vector2(0, -99)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Platform1/Area2D"]
+shape = SubResource("RectangleShape2D_xpfmq")
+
+[node name="Platform2" type="StaticBody2D" parent="."]
+position = Vector2(1072, 828)
+script = ExtResource("3_m302u")
+metadata/_edit_group_ = true
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="Platform2"]
+position = Vector2(-5.72205e-06, 9.53674e-07)
+scale = Vector2(224, 36)
+mesh = SubResource("BoxMesh_aqs8r")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Platform2"]
+shape = SubResource("RectangleShape2D_lfj3t")
+
+[node name="Panel" type="Panel" parent="Platform2"]
+offset_left = -48.0
+offset_top = -9.0
+offset_right = 48.0
+offset_bottom = 9.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_45m7g")
+
+[node name="Label" type="Label" parent="Platform2/Panel"]
+layout_mode = 0
+offset_top = -9.0
+offset_right = 96.0
+offset_bottom = 27.0
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Area2D" type="Area2D" parent="Platform2"]
+position = Vector2(0, -99)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Platform2/Area2D"]
+shape = SubResource("RectangleShape2D_xpfmq")
+
+[node name="Panel" type="Panel" parent="."]
+offset_left = 768.0
+offset_top = 693.0
+offset_right = 832.0
+offset_bottom = 747.0
+
+[node name="OP" type="Label" parent="Panel"]
+layout_mode = 0
+offset_right = 64.0
+offset_bottom = 54.0
+horizontal_alignment = 1
+vertical_alignment = 1

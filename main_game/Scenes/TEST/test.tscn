@@ -1,0 +1,63 @@
+[gd_scene load_steps=10 format=3 uid="uid://wm4j76xk3r1b"]
+
+[ext_resource type="PackedScene" uid="uid://b48i5lkpuq1rl" path="res://Scenes/Player/player.tscn" id="1_r7po7"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_g3rlc"]
+sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+
+[sub_resource type="Sky" id="Sky_klgdf"]
+sky_material = SubResource("ProceduralSkyMaterial_g3rlc")
+
+[sub_resource type="Environment" id="Environment_6um7v"]
+background_mode = 2
+sky = SubResource("Sky_klgdf")
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="Gradient" id="Gradient_gltot"]
+offsets = PackedFloat32Array(0, 0.273, 1)
+colors = PackedColorArray(0, 0.407843, 0, 1, 0, 0.45098, 0, 1, 1, 0.560784, 0.568627, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_cf026"]
+noise_type = 4
+frequency = 0.025
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_bxtsa"]
+color_ramp = SubResource("Gradient_gltot")
+noise = SubResource("FastNoiseLite_cf026")
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_f402u"]
+as_normal_map = true
+color_ramp = SubResource("Gradient_gltot")
+noise = SubResource("FastNoiseLite_cf026")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_n2ibw"]
+transparency = 1
+albedo_texture = SubResource("NoiseTexture2D_bxtsa")
+normal_enabled = true
+normal_texture = SubResource("NoiseTexture2D_f402u")
+
+[node name="TEST" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_6um7v")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75, -0.433013, 0, 0, 0)
+shadow_enabled = true
+directional_shadow_mode = 1
+directional_shadow_split_1 = 0.005
+
+[node name="Player" parent="." instance=ExtResource("1_r7po7")]
+
+[node name="Camera3D" parent="Player" index="2"]
+size = 14.5
+
+[node name="CSGBox3D" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.6, 0)
+material_override = SubResource("StandardMaterial3D_n2ibw")
+use_collision = true
+size = Vector3(50, 0.1, 50)
+
+[editable path="Player"]
